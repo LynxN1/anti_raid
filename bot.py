@@ -4,7 +4,6 @@ import time
 
 from termcolor import colored
 
-
 client = amino.Client()
 
 email = input("Email: ")
@@ -16,9 +15,6 @@ for x, name in enumerate(sub_clients.name, 1):
     print(f"{x}. {name}")
 com_id = sub_clients.comId[int(input("Выберите сообщество: ")) - 1]
 sub_client = amino.SubClient(comId=str(com_id), profile=client.profile)
-
-
-admins = {}
 
 
 @client.callbacks.event("TYPE_USER_SHARE_EXURL")
@@ -61,26 +57,14 @@ def handle_messages(data):
 
 
 def exploit_message(chatid: str, userid: str, nickname: str):
-    if admins.get(chatid) is None:
-        set_admins(chatid)
-    if userid not in admins[chatid]:
-        try:
-            sub_client.kick(userId=userid, chatId=chatid, allowRejoin=False)
-            sub_client.send_message(chatId=chatid,
-                                    message=f"{nickname} был удален из чата за отправку сообщения с измененным типом")
-        except amino.exceptions.AccessDenied:
-            pass
-        except Exception as e:
-            print(e)
+    try:
+        sub_client.kick(userId=userid, chatId=chatid, allowRejoin=False)
+        sub_client.send_message(chatId=chatid, message=f"{nickname} был удален из чата за отправку сообщения с измененным типом")
+    except amino.exceptions.AccessDenied:
+        pass
+    except Exception as e:
+        print(e)
     print(colored(f"{nickname} отправил сообщение с измененным типом в чате {chatid}", "red"))
-
-
-def set_admins(chatid: str):
-    chat = sub_client.get_chat_thread(chatId=chatid)
-    if chat.type != 0:
-        admins[chatid] = [*chat.coHosts, chat.author.userId]
-    else:
-        admins[chatid] = [chat.author.userId]
 
 
 def restart():
