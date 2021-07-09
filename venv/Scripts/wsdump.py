@@ -1,4 +1,4 @@
-#!C:\Users\Lynx1\Desktop\anti_raid\venv\Scripts\python.exe
+#!C:\Users\Lynx1\Desktop\MySoftware\Amino\anti_raid\venv\Scripts\python.exe
 
 import argparse
 import code

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Lynx1\Desktop\anti_raid\venv"
+VIRTUAL_ENV="C:\Users\Lynx1\Desktop\MySoftware\Amino\anti_raid\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
