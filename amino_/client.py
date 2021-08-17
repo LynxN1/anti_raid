@@ -36,7 +36,6 @@ class Client(Callbacks, SocketHandler):
         self.userId = None
         self.account: objects.UserProfile = objects.UserProfile(None)
         self.profile: objects.UserProfile = objects.UserProfile(None)
-        self.check_device(self.device_id)
         
     def parse_headers(self, data = None):
         if not data:

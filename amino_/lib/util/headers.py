@@ -3,7 +3,7 @@ from amino_.lib.util import device
 sid = None
 
 class Headers:
-    def __init__(self, data = None, type = None, deviceId: str = None, sig: str = None):
+    def __init__(self, data = None, type = None, deviceId: str = None):
         if deviceId:
             dev = device.DeviceGenerator(deviceId=deviceId)
         else:
@@ -19,5 +19,4 @@ class Headers:
         if data: headers["Content-Length"] = str(len(data))
         if sid: headers["NDCAUTH"] = f"sid={sid}"
         if type: headers["Content-Type"] = type
-        if sig: headers["NDC-MSG-SIG"] = sig
         self.headers = headers

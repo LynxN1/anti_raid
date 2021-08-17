@@ -3,9 +3,13 @@ import time
 import amino_
 
 client = amino_.Client("226001BFCBBC40B661C61281F7C1E716660E3909B5DAA30D26B63412EA70B7AD28B8CACF832E6487F4")
-client.login(email="", password="")  # Логин и пароль от аккаунта бота
+client.login(email=input("Email: "), password=input("Password: "))  # Логин и пароль от аккаунта бота
 print("Авторизация прошла успешно")
-sub_client = amino_.SubClient(comId="", profile=client.profile)  # Айди сообщества
+subs = client.sub_clients(0, 100)
+for x, i in enumerate(subs.name, 1):
+    print(f"{x}. {i}")
+comId = subs.comId[int(input("Выберите сообщество: ")) - 1]
+sub_client = amino_.SubClient(comId=comId, profile=client.profile)  # Айди сообщества
 print("Мониторинг чатов...")
 
 
